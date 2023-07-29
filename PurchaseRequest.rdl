@@ -65,7 +65,6 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <ListStyle>Numbered</ListStyle>
                               <Style>
                                 <TextAlign>Center</TextAlign>
                               </Style>
@@ -672,14 +671,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox10">
+                        <Textbox Name="Decrition">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!Decrition.Value</Value>
                                   <Style>
                                     <FontFamily>Georgia</FontFamily>
                                   </Style>
@@ -690,7 +689,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox10</rd:DefaultName>
+                          <rd:DefaultName>Decrition</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>DimGray</Color>
@@ -727,14 +726,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Requedt_Name">
+                        <Textbox Name="UOM">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Requedt_Name.Value</Value>
+                                  <Value>=Fields!UOM.Value</Value>
                                   <Style>
                                     <FontFamily>Georgia</FontFamily>
                                   </Style>
@@ -745,7 +744,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Requedt_Name</rd:DefaultName>
+                          <rd:DefaultName>UOM</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>DimGray</Color>
@@ -782,14 +781,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="ITEM">
+                        <Textbox Name="Loocation">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ITEM.Value</Value>
+                                  <Value>=Fields!Loocation.Value</Value>
                                   <Style>
                                     <FontFamily>Georgia</FontFamily>
                                   </Style>
@@ -800,7 +799,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>ITEM</rd:DefaultName>
+                          <rd:DefaultName>Loocation</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>DimGray</Color>
@@ -892,14 +891,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Requedt_Date">
+                        <Textbox Name="Quote_No">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Requedt_Date.Value</Value>
+                                  <Value>=Fields!Quote_No.Value</Value>
                                   <Style>
                                     <FontFamily>Georgia</FontFamily>
                                     <Format>d</Format>
@@ -911,7 +910,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Requedt_Date</rd:DefaultName>
+                          <rd:DefaultName>Quote_No</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>DimGray</Color>
@@ -948,14 +947,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox6">
+                        <Textbox Name="Order_No">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!Order_No.Value</Value>
                                   <Style>
                                     <FontFamily>Georgia</FontFamily>
                                   </Style>
@@ -966,7 +965,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <rd:DefaultName>Order_No</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>DimGray</Color>
@@ -1003,14 +1002,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox8">
+                        <Textbox Name="Status">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!Status.Value</Value>
                                   <Style>
                                     <FontFamily>Georgia</FontFamily>
                                   </Style>
@@ -1021,7 +1020,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox8</rd:DefaultName>
+                          <rd:DefaultName>Status</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>DimGray</Color>
@@ -1718,6 +1717,60 @@
       </DefaultValue>
       <Prompt>QuantityCaption</Prompt>
     </ReportParameter>
+    <ReportParameter Name="UOMCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>UOMCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>UOMCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="LoocationCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>LoocationCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>LoocationCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DecritionCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>DecritionCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>DecritionCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Quote_NoCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Quote_NoCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Quote_NoCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Order_NoCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Order_NoCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Order_NoCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="StatusCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>StatusCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>StatusCaption</Prompt>
+    </ReportParameter>
     <ReportParameter Name="Requedt_DateCaption">
       <DataType>String</DataType>
       <DefaultValue>
@@ -1731,7 +1784,7 @@
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>1</NumberOfColumns>
-      <NumberOfRows>5</NumberOfRows>
+      <NumberOfRows>11</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -1756,6 +1809,36 @@
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>4</RowIndex>
+          <ParameterName>UOMCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>LoocationCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>6</RowIndex>
+          <ParameterName>DecritionCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>7</RowIndex>
+          <ParameterName>Quote_NoCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>8</RowIndex>
+          <ParameterName>Order_NoCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>9</RowIndex>
+          <ParameterName>StatusCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>10</RowIndex>
           <ParameterName>Requedt_DateCaption</ParameterName>
         </CellDefinition>
       </CellDefinitions>
@@ -1844,6 +1927,24 @@ sLqXNNrKZaCHT3p4QR0PVcuXrF9vRFN8Ey492eBPktVEBSWMZdrVrk1mlmklp3J5ADhHgq1EBSGN5Vc5
         </Field>
         <Field Name="Quantity">
           <DataField>Quantity</DataField>
+        </Field>
+        <Field Name="UOM">
+          <DataField>UOM</DataField>
+        </Field>
+        <Field Name="Loocation">
+          <DataField>Loocation</DataField>
+        </Field>
+        <Field Name="Decrition">
+          <DataField>Decrition</DataField>
+        </Field>
+        <Field Name="Quote_No">
+          <DataField>Quote_No</DataField>
+        </Field>
+        <Field Name="Order_No">
+          <DataField>Order_No</DataField>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
         </Field>
         <Field Name="Requedt_Date">
           <DataField>Requedt_Date</DataField>

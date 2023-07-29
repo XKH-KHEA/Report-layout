@@ -10,31 +10,64 @@ report 50102 "Purchase"
     {
         dataitem("Purchase Request"; "Purchase Request")
         {
-            RequestFilterFields = "No.","Request Date";
-           
+            DataItemTableView = SORTING("No.");
+            RequestFilterFields = "No.", "Requedt Name","PO No.";
+
             column(Requedt_No; "No.")
             {
                 IncludeCaption = true;
             }
-            column(Requedt_Name;"Requedt Name")
+            column(Requedt_Name; "Requedt Name")
             {
                 IncludeCaption = true;
             }
-            column(ITEM;ITEM)
+            column(ITEM; ITEM)
             {
                 IncludeCaption = true;
             }
-        
-            column(Quantity;Quantity)
+
+            column(Quantity; Quantity)
             {
-                IncludeCaption =true;
+                IncludeCaption = true;
+            }
+            column(UOM; UOM)
+            {
+                IncludeCaption = true;
+            }
+            column(Loocation; Loocation)
+            {
+                IncludeCaption = true;
+            }
+            column(Decrition; Decrition)
+            {
+                IncludeCaption = true;
+            }
+            column(Quote_No; "Quote No")
+            {
+                IncludeCaption = true;
+            }
+            column(Order_No; "Order No")
+            {
+                IncludeCaption = true;
+            }
+            column(Status; Status)
+            {
+                IncludeCaption = true;
             }
             column(Requedt_Date; "Request Date")
             {
 
-                IncludeCaption =true;
+                IncludeCaption = true;
             }
+            dataitem(Khmer; "Integer")
+            {
+                DataItemTableView = SORTING(Number);
 
+                trigger OnPreDataItem()
+                begin
+                     SetRange(Number, 1, "Purchase Request"."PO No.");
+                end;
+            }
             trigger OnAfterGetRecord()
             var
                 FormatAddr: Codeunit "Format Address";
@@ -43,8 +76,8 @@ report 50102 "Purchase"
                 if Total < Price then
                     CurrReport.Skip();
 
-            //    if not HideAddr then
-            //        FormatAddr.PurchHeaderPayTo();(VendorAddr, "Purchase Request");
+                //    if not HideAddr then
+                //        FormatAddr.PurchHeaderPayTo();(VendorAddr, "Purchase Request");
             end;
         }
     }
@@ -95,7 +128,7 @@ report 50102 "Purchase"
     var
         FormatDocument: Codeunit "Format Document";
     begin
-      VendFilter := FormatDocument.GetRecordFiltersWithCaptions("Purchase Request");
+        VendFilter := FormatDocument.GetRecordFiltersWithCaptions("Purchase Request");
     end;
 
     var
@@ -112,25 +145,25 @@ report 50102 "Purchase"
 
     local procedure CalculateAmtOfPurchaseLCY(): Decimal
     var
-        VendorLedgEntry: Record "Vendor Ledger Entry";
+        Puchase: Record "Purchase Request";
         Amt: Decimal;
         i: Integer;
     begin
-        with VendorLedgEntry do begin
-            SetCurrentKey("Document Type", "Vendor No.", "Posting Date");
-            SetRange("Vendor No.", "Purchase Request"."No.");
-            SetFilter("Posting Date", "Purchase Request".GetFilter("Request Date"));
+        with Puchase do begin
+            SetCurrentKey("PO No.", "Order No","Request Date");
+            SetRange(ITEM, "Purchase Request"."No.");
+            SetFilter("Request Date", "Purchase Request".GetFilter("Request Date"));
             for i := 1 to 3 do begin
                 case i of
                     1:
-                        SetRange("Document Type", "Document Type"::Invoice);
-                    2:
-                        SetRange("Document Type", "Document Type"::"Credit Memo");
-                    3:
-                        SetRange("Document Type", "Document Type"::Refund);
+                        SetRange("PO No.",1, "Purchase Request"."PO No.");
+                   // 2:
+                       // SetRange("Document Type", "Document Type"::"Credit Memo");
+                   // 3:
+                      //  SetRange("Document Type", "Document Type"::Refund);
                 end;
-                CalcSums("Purchase (LCY)");
-                Amt := Amt + "Purchase (LCY)";
+                //CalcSums(Quantity);
+                Amt := Amt + Price;
             end;
             exit(-Amt);
         end;

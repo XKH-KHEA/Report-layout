@@ -28,6 +28,16 @@ table 50103 "Purchase Request"
             Caption = 'Quantity';
             DataClassification = SystemMetadata;
         }
+         field(7; Loocation; Code[100])
+        {
+            Caption = 'Loocation';
+            DataClassification = SystemMetadata;
+        }
+         field(8; UOM; Code[100])
+        {
+            Caption = 'UOM';
+            DataClassification = SystemMetadata;
+        }
          field(5; Decrition; Code[100])
         {
             Caption = 'Decrition';
@@ -37,6 +47,29 @@ table 50103 "Purchase Request"
         {
             Caption = 'Request Date';
             DataClassification = SystemMetadata;
+        }
+        field(9; "Quote No"; Code[100])
+        {
+            Caption = 'Quote No';
+            DataClassification = SystemMetadata;
+        }
+        field(10; "Order No"; Code[100])
+        {
+            Caption = 'Order No';
+            DataClassification = SystemMetadata;
+            
+        }
+          field(11; "Status"; Code[100])
+        {
+            Caption = 'Status';
+            DataClassification = SystemMetadata;
+            
+        }
+          field(12; "PO No.";  Integer)
+        {
+            Caption = 'Po No';
+            DataClassification = SystemMetadata;
+            
         }
     }
     keys

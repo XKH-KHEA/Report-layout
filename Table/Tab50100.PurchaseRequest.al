@@ -5,13 +5,13 @@ table 50103 "Purchase Request"
     DataClassification =SystemMetadata;
    // DataCaptionFields = "No.", "Buy-from Vendor Name";
     LookupPageID = "Purchase Request";
-
     fields
     {
         field(1; "No."; Code[20])
         {
             Caption = 'No.';
             DataClassification = SystemMetadata;
+           // TableRelation = "Purchase Request";
         }
         field(2; "Requedt Name"; Text[100])
         {
@@ -70,6 +70,27 @@ table 50103 "Purchase Request"
             Caption = 'Po No';
             DataClassification = SystemMetadata;
             
+        } 
+        field(13; "ID Categoy"; Code[20])
+        {
+            Caption = 'ID Categoy';
+            DataClassification = SystemMetadata;
+            TableRelation = Category;
+        }
+
+         field(102; "E-Mail"; Text[80])
+        {
+            Caption = 'Email';
+            ExtendedDatatype = EMail;
+
+            trigger OnValidate()
+            var
+                MailManagement: Codeunit "Mail Management";
+            begin
+                if "E-Mail" = '' then
+                    exit;
+                MailManagement.CheckValidEmailAddresses("E-Mail");
+            end;
         }
     }
     keys

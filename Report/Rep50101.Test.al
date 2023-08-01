@@ -1,4 +1,4 @@
-report 50111 Test
+report 50104 Test
 {
   RDLCLayout = './layouts/MyOrderConf.rdl'; 
     Caption = 'My Order Confirmation'; 
@@ -13,7 +13,7 @@ report 50111 Test
  
             column(BilltoCustomerNo; "Bill-to Customer No.") 
             {   
-        } 
+         } 
  
             column(BilltoName; "Bill-to Name") 
             { 

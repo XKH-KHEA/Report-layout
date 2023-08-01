@@ -1,4 +1,4 @@
-page 50101 "Purchase Request"
+page 50109 "Purchase Request"
 {
     Caption = 'Purchase Request';
     PageType = List;
@@ -6,7 +6,7 @@ page 50101 "Purchase Request"
     ApplicationArea = All;
     UsageCategory = Administration;
     Editable = true;
-    CardPageID = "Purchase Request";
+    CardPageID = Request;
     PromotedActionCategories = 'New,Process,Request,Tester,Request Approval,Print/Send,Order,Release,Posting,Navigate';
     QueryCategory = 'Purchase Resquest';
     RefreshOnActivate = true;
@@ -62,6 +62,7 @@ page 50101 "Purchase Request"
                 {
                     ApplicationArea = all;
                 }
+   
             }
         }
         area(factboxes)
@@ -157,6 +158,37 @@ page 50101 "Purchase Request"
                     end;
                 }
             }
+             action(category)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'category';
+                Image = Create;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                RunObject = Page Category;
+                RunPageMode = Create;
+                ToolTip = 'Opens vendor ledger entries for the selected vendor with invoices that have not been paid yet.';
+            }
+             action(Email)
+            {
+                ApplicationArea = All;
+                Caption = 'Send Email';
+                Image = Email;
+                ToolTip = 'Send an email to this vendor.';
+                Promoted = true;
+                PromotedCategory = Process;
+                Enabled = CanSendEmail;
+                trigger OnAction()
+                var
+                    TempEmailItem: Record "Email Item" temporary;
+                    EmailScenario: Enum "Email Scenario";
+                begin
+                    TempEmailItem.AddSourceDocument(Database::"Purchase Request", Rec.SystemId);
+                    TempEmailitem."Send to" := Rec."E-Mail";
+                    TempEmailItem.Send(false, EmailScenario::Default);
+                end;
+            }
         }
         area(Reporting)
         {
@@ -183,10 +215,48 @@ page 50101 "Purchase Request"
                 }
             }
         }
-
     }
+     trigger OnAfterGetCurrRecord()
     var
+        Vendor: Record "Purchase Request";
+        CRMCouplingManagement: Codeunit "CRM Coupling Management";
+        RecordId: RecordId;
+    begin
+        OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(RecordId);
+
+        CanCancelApprovalForRecord := ApprovalsMgmt.CanCancelApprovalForRecord(RecordId);
+
+        WorkflowWebhookManagement.GetCanRequestAndCanCancel(RecordId, CanRequestApprovalForFlow, CanCancelApprovalForFlow);
+
+        CRMIsCoupledToRecord := CRMIntegrationEnabled or CDSIntegrationEnabled;
+        if CRMIsCoupledToRecord then
+            CRMIsCoupledToRecord := CRMCouplingManagement.IsRecordCoupledToCRM(RecordId);
+
+        // Contextual Power BI FactBox: send data to filter the report in the FactBox
+       // CurrPage."Power BI Report FactBox".PAGE.SetCurrentListSelection(, false, PowerBIVisible);
+
+        CurrPage.SetSelectionFilter(Vendor);
+        CanSendEmail := Vendor.Count() = 1;
+    end;
+    var
+        //PowerBIVisible: Boolean;
+        
+        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+        ReadSoftOCRMasterDataSync: Codeunit "ReadSoft OCR Master Data Sync";
+        WorkflowWebhookManagement: Codeunit "Workflow Webhook Management";
+        [InDataSet]
+        CanSendEmail: Boolean;
+        OpenApprovalEntriesExist: Boolean;
+        CanCancelApprovalForRecord: Boolean;
         PowerBIVisible: Boolean;
+        ResyncVisible: Boolean;
+        CanRequestApprovalForFlow: Boolean;
+        CanCancelApprovalForFlow: Boolean;
+        CRMIntegrationEnabled: Boolean;
+        CDSIntegrationEnabled: Boolean;
+        CRMIsCoupledToRecord: Boolean;
+        BlockedFilterApplied: Boolean;
+        ExtendedPriceEnabled: Boolean;
 }
 
 

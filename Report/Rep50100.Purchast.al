@@ -1,4 +1,4 @@
-report 50102 "Purchase"
+report 50103 "Purchase"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './PurchaseRequest.rdl';
@@ -99,6 +99,12 @@ report 50102 "Purchase"
                         Caption = 'Amounts';
                         ToolTip = 'Specifies an amount so that the report will only include those customers to which you have sold more than this amount within the specified dates.';
                     }
+                    field(Request;RequestDate)
+                    {
+                        ApplicationArea = basiv,Suite;
+                        Caption= 'Date';
+                        ToolTip = 'Date for Request';
+                    }
                     field(HideAddr; HideAddr)
                     {
                         ApplicationArea = Basic, Suite;
@@ -135,6 +141,7 @@ report 50102 "Purchase"
         Price: Decimal;
         HideAddr: Boolean;
         Total: Decimal;
+        RequestDate : Date;
         VendorAddr: array[8] of Text[100];
         VendFilter: Text;
         VendPurchListCaptLbl: Label 'Vendor - Purchase List';
@@ -149,7 +156,9 @@ report 50102 "Purchase"
         Amt: Decimal;
         i: Integer;
     begin
+#pragma warning disable AL0606
         with Puchase do begin
+#pragma warning restore AL0606
             SetCurrentKey("PO No.", "Order No","Request Date");
             SetRange(ITEM, "Purchase Request"."No.");
             SetFilter("Request Date", "Purchase Request".GetFilter("Request Date"));
